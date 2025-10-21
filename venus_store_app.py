@@ -1,8 +1,4 @@
-# ------------------------ تثبيت المكتبات ------------------------
-!pip install streamlit pandas numpy scikit-learn plotly --quiet
-
-# ------------------------ ملف التطبيق ------------------------
-import streamlit as st
+import streamlit as st# ------------------------ تثبيت المكتبات ------------------------
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
@@ -92,3 +88,4 @@ if st.button("Purchase"):
             labels={'x':'Behavior','y':'Probability %'}
         )
         st.plotly_chart(fig, use_container_width=True)
+
