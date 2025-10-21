@@ -1,8 +1,6 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
 import plotly.express as px
 
 # ======================= إعداد الصفحة =======================
@@ -46,7 +44,6 @@ products = {
 
 # ======================= واجهة المستخدم =======================
 st.title("Venus Store 🌸")
-
 st.markdown("## Products")
 
 cart = {}
@@ -67,17 +64,17 @@ if st.button("Purchase"):
         st.success("Purchase completed!")
 
         # ======================= محاكاة تنبؤ السلوك =======================
-        # كل عملية شراء جديدة تعطي احتمال سلوك مريب
         total_items = sum(cart.values())
-        user_data = np.array([[total_items]])
-        scaler = StandardScaler()
-        X_scaled = scaler.fit_transform(user_data)  # محاكاة فقط
-        model = LogisticRegression()
-        # نحتاج على الأقل صنفين لتدريب النموذج، محاكاة بيانات
-        model.fit(np.array([[0],[5]]), [0,1])
-        prob = model.predict_proba(X_scaled)[0]
-        normal_pct = prob[0]*100
-        suspicious_pct = prob[1]*100
+
+        # منطق السلوك: طبيعي إذا <5، مريب إذا >=5
+        if total_items < 5:
+            normal_pct = 100
+            suspicious_pct = 0
+        else:
+            normal_pct = max(0, 100 - (total_items - 4)*20)  # كل زيادة بعد 4 تخفض الطبيعي
+            suspicious_pct = 100 - normal_pct
+            normal_pct = max(normal_pct, 0)
+            suspicious_pct = min(suspicious_pct, 100)
 
         st.subheader("Customer Behavior Prediction")
         fig = px.bar(
