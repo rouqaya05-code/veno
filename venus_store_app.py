@@ -37,9 +37,11 @@ h1 {
 # ======================= بيانات المنتجات =======================
 products = {
     "Red Shirt": {"price": 25, "img": "https://i.pinimg.com/1200x/31/ce/f5/31cef5d7bfe8734918d5596323996ff4.jpg"},
-    "Backpack": {"price": 50, "img": "https://i.pinimg.com/736x/a0/c4/17/a0c4175e744040d0d5e8527bbde49e04.jpg"},
+    "Backpack": {"price": 50, "img": "https://i.pinimg.com/736x/d1/70/ec/d170ec923e5e6a3c4f6cf75c84ddbafc.jpg"},
     "Watch": {"price": 120, "img": "https://i.pinimg.com/736x/0e/e1/49/0ee149229d01511714827e5a3f055ddf.jpg"},
     "Sunglasses": {"price": 75, "img": "https://i.pinimg.com/1200x/dd/43/99/dd4399d6603c9f7468aa3920fa69c032.jpg"}
+    "White Dress": {"price": 300, "img": "https://i.pinimg.com/736x/40/80/38/4080388676549a16a6a03da69c588f22.jpg"}
+    "Pink Pajamas": {"price": 23, "img": "https://i.pinimg.com/1200x/bb/a9/0b/bba90b9eaf89df5f15df26cc6b46c528.jpg"}
 }
 
 # ======================= واجهة المستخدم =======================
@@ -67,7 +69,7 @@ if st.button("Purchase"):
         total_items = sum(cart.values())
 
         # منطق السلوك: طبيعي إذا <5، مريب إذا >=5
-        if total_items < 5:
+        if total_items < 3:
             normal_pct = 100
             suspicious_pct = 0
         else:
@@ -85,3 +87,4 @@ if st.button("Purchase"):
             labels={'x':'Behavior','y':'Probability %'}
         )
         st.plotly_chart(fig, use_container_width=True)
+
