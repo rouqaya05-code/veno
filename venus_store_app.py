@@ -1,7 +1,6 @@
 # File: venus_store_app.py
 
 import streamlit as st
-import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
@@ -10,12 +9,12 @@ import plotly.express as px
 # إعداد الصفحة
 st.set_page_config(page_title="Venus Store", layout="wide")
 
-# شعار التطبيق
+# شعار التطبيق بحجم النص
 logo_url = "https://www2.0zz0.com/2025/10/27/20/506464810.png"
 st.markdown(f"""
     <div style="display:flex; align-items:center; justify-content:center;">
-        <img src="{logo_url}" style="width:32px; height:32px; margin-right:10px;" />
-        <h1 style="margin:0;">Venus Store</h1>
+        <img src="{logo_url}" style="height:48px; margin-right:10px;" />
+        <h1 style="margin:0; font-size:48px;">Venus Store</h1>
     </div>
     <hr>
 """, unsafe_allow_html=True)
@@ -43,20 +42,51 @@ st.sidebar.header("Customer Info")
 age = st.sidebar.slider("Age", 18, 60, 25)
 income = st.sidebar.slider("Monthly Income ($)", 1000, 10000, 3000)
 
-# المنتجات
+# قسم عروض اليوم
+st.markdown("## Today's Deals")
+deals = [
+    {"name": "Wireless Earbuds", "price": 39, "old_price": 59, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"},
+    {"name": "Leather Wallet", "price": 29, "old_price": 45, "img": "https://images.unsplash.com/photo-1616627989397-4c7c1e3b6c3e"}
+]
+deal_cols = st.columns(len(deals))
+for i, deal in enumerate(deals):
+    with deal_cols[i]:
+        st.image(deal["img"], use_container_width=True)
+        st.markdown(f"**{deal['name']}**")
+        st.markdown(f"<span style='color:#d32f2f;'>${deal['price']}</span> <del>${deal['old_price']}</del>", unsafe_allow_html=True)
+
+st.markdown("---")
+
+# قسم المنتجات المميزة
+st.markdown("## Featured Products")
+featured = [
+    {"name": "Smart Watch", "price": 99, "img": "https://images.unsplash.com/photo-1517059224940-d4af9eec41e5"},
+    {"name": "Stylish Backpack", "price": 75, "img": "https://images.unsplash.com/photo-1598032893363-8f7c0f6f5b6e"},
+    {"name": "Elegant Sunglasses", "price": 55, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"}
+]
+feat_cols = st.columns(len(featured))
+for i, item in enumerate(featured):
+    with feat_cols[i]:
+        st.image(item["img"], use_container_width=True)
+        st.markdown(f"**{item['name']}**")
+        st.markdown(f"Price: ${item['price']}")
+
+st.markdown("---")
+
+# المنتجات الأساسية
+st.markdown("## Select Your Products")
 products = [
-    {"name": "Red Shirt", "price": 25, "img": "https://i.pinimg.com/1200x/31/ce/f5/31cef5d7bfe8734918d5596323996ff4.jpg"},
-    {"name": "Backpack", "price": 60, "img": "https://i.pinimg.com/736x/a0/c4/17/a0c4175e744040d0d5e8527bbde49e04.jpg"},
-    {"name": "Watch", "price": 120, "img": "https://i.pinimg.com/736x/0e/e1/49/0ee149229d01511714827e5a3f055ddf.jpg"},
-    {"name": "Sunglasses", "price": 50, "img": "https://i.pinimg.com/1200x/dd/43/99/dd4399d6603c9f7468aa3920fa69c032.jpg"}
+    {"name": "Red Shirt", "price": 25, "img": "https://images.unsplash.com/photo-1618354691373-8f6f3c1e8c3b"},
+    {"name": "Backpack", "price": 60, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"},
+    {"name": "Watch", "price": 120, "img": "https://images.unsplash.com/photo-1517059224940-d4af9eec41e5"},
+    {"name": "Sunglasses", "price": 50, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"}
 ]
 
-st.markdown("### Select your products:")
 cart = []
 cols = st.columns(4)
 for i, product in enumerate(products):
     with cols[i]:
-        st.image(product["img"], use_column_width=True)
+        st.image(product["img"], use_container_width=True)
         st.markdown(f"**{product['name']}**")
         st.markdown(f"Price: ${product['price']}")
         qty = st.number_input(f"Qty", min_value=0, max_value=10, value=0, key=product['name'])
