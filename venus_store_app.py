@@ -147,7 +147,7 @@ if st.button("Checkout & Predict Behavior"):
         col1.metric("Normal Behavior", f"{normal_prob:.2f}%")
         col2.metric("Suspicious Behavior", f"{suspicious_prob:.2f}%")
 
-                fig = px.pie(
+        fig = px.pie(
             names=["Normal", "Suspicious"],
             values=[normal_prob, suspicious_prob],
             color=["Normal", "Suspicious"],
