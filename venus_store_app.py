@@ -10,7 +10,7 @@ st.set_page_config(page_title="MYTHERESA", layout="wide")
 # تنسيق CSS للخطوط والتصميم
 st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
 
         html, body, [class*="css"] {
@@ -19,20 +19,22 @@ st.markdown("""
             color: #2c2c2c;
         }
 
-        h1, h2, h3 {
+        h1 {
             font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #1a1a1a;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 0.5em;
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
+            text-align: center;
+            color: #1a1a1a;
             margin-top: 2rem;
             margin-bottom: 1rem;
-            color: #1a1a1a;
+            letter-spacing: 1px;
         }
 
         .price-tag {
@@ -59,7 +61,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # عنوان المتجر
-st.markdown("<h1 style='text-align:center;'>MYTHERESA</h1><hr>", unsafe_allow_html=True)
+st.markdown("<h1>MYTHERESA</h1><hr>", unsafe_allow_html=True)
 
 # بيانات الزبون
 st.sidebar.header("Customer Info")
@@ -67,13 +69,13 @@ age = st.sidebar.slider("Age", 18, 60, 25)
 income = st.sidebar.slider("Monthly Income ($)", 1000, 10000, 3000)
 
 # قسم العروض
-st.markdown("<h2 class='section-title'>HOLIDAY SEASON IS COMING</h2>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>HOLIDAY SEASON IS COMING</div>", unsafe_allow_html=True)
 st.image("https://www.mytheresa.com/content/2760/1250/65/8b117e66-3bef-4dc4-8eeb-e1facf155a7e.jpg", use_container_width=True)
 
 st.markdown("---")
 
 # قسم المنتجات المميزة
-st.markdown("<h2 class='section-title'>Featured Products</h2>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>Featured Products</div>", unsafe_allow_html=True)
 featured = [
     {"name": "Coffee 1940s Faux Fur Coat", "price": 200, "img": "https://i.pinimg.com/736x/89/1b/06/891b06dc311ba96d1cad22eed7f986f1.jpg"},
     {"name": "1996 gripoix-buttons velour shirt", "price": 500, "img": "https://i.pinimg.com/736x/ac/a2/1e/aca21e70d95e62dedc827d59018a371a.jpg"},
@@ -89,7 +91,7 @@ for i, item in enumerate(featured):
 st.markdown("---")
 
 # المنتجات الأساسية
-st.markdown("<h2 class='section-title'>Best-selling Categories</h2>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>Best-selling Categories</div>", unsafe_allow_html=True)
 products = [
     {"name": "Bettina Mini croc-effect leather tote bag", "price": 600, "img": "https://i.pinimg.com/736x/ad/f6/0d/adf60d0058ebb13457f6d239eeb0b4b0.jpg"},
     {"name": "Anagram leather-trimmed quilted jacket", "price": 1000, "img": "https://www.mytheresa.com/media/1094/1238/100/e5/P01117649.jpg"},
@@ -136,7 +138,7 @@ if st.button("Checkout & Predict Behavior"):
         normal_prob = pred_prob[0] * 100
         suspicious_prob = pred_prob[1] * 100
 
-        st.markdown("<h2 class='section-title'>Behavior Prediction</h2>", unsafe_allow_html=True)
+        st.markdown("<div class='section-title'>Behavior Prediction</div>", unsafe_allow_html=True)
         col1, col2 = st.columns(2)
         col1.metric("Normal Behavior", f"{normal_prob:.2f}%")
         col2.metric("Suspicious Behavior", f"{suspicious_prob:.2f}%")
