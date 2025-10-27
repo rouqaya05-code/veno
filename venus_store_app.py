@@ -148,9 +148,13 @@ if st.button("Checkout & Predict Behavior"):
         col2.metric("Suspicious Behavior", f"{suspicious_prob:.2f}%")
 
         fig = px.pie(
-            names=["Normal", "Suspicious"],
-            values=[normal_prob, suspicious_prob],
-            color=["Normal", "Suspicious"],
-            color_discrete_map={
-                "Normal": "#e4b7c4",
-                "Susp
+    names=["Normal", "Suspicious"],
+    values=[normal_prob, suspicious_prob],
+    color=["Normal", "Suspicious"],
+    color_discrete_map={
+        "Normal": "#e4b7c4",
+        "Suspicious": "#990033"
+    },
+    title="Customer Behavior Analysis"
+)
+st.plotly_chart(fig, use_container_width=True)
