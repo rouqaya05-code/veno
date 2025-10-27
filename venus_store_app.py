@@ -131,13 +131,19 @@ if st.button("Checkout & Predict Behavior"):
         st.warning("No items selected.")
     else:
         if purchases <= 3:
-            behavior = "Normal"
+            normal_prob = 80
+            suspicious_prob = 20
         else:
-            behavior = "Suspicious"
+            normal_prob = 25
+            suspicious_prob = 75
+
+        col1, col2 = st.columns(2)
+        col1.metric("Normal Behavior", f"{normal_prob:.2f}%")
+        col2.metric("Suspicious Behavior", f"{suspicious_prob:.2f}%")
 
         fig = px.pie(
             names=["Normal", "Suspicious"],
-            values=[100 if behavior == "Normal" else 0, 100 if behavior == "Suspicious" else 0],
+            values=[normal_prob, suspicious_prob],
             color=["Normal", "Suspicious"],
             color_discrete_map={
                 "Normal": "#e4b7c4",
@@ -148,10 +154,10 @@ if st.button("Checkout & Predict Behavior"):
         )
         fig.update_traces(textinfo='percent+label', textfont_size=16)
         st.plotly_chart(fig, use_container_width=True)
-
 # زر Clear لإعادة تعيين المشتريات
 st.markdown("<div class='clear-button'>", unsafe_allow_html=True)
 if st.button("Clear"):
     st.session_state.cart = []
     st.success("Cart cleared. Purchases reset to zero.")
 st.markdown("</div>", unsafe_allow_html=True)
+
