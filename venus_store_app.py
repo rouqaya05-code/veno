@@ -152,4 +152,4 @@ if st.button("Checkout & Predict Behavior"):
             values=[normal_prob, suspicious_prob],
             color=["Normal", "Suspicious"],
             color_discrete_map={
-                "Normal": "#e4b
+                "Normal": "#e4
