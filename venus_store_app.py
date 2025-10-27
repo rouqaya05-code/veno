@@ -130,12 +130,8 @@ if st.button("Checkout & Predict Behavior"):
     if purchases == 0:
         st.warning("No items selected.")
     else:
-        if purchases <= 3:
-            normal_prob = 80
-            suspicious_prob = 20
-        else:
-            normal_prob = 25
-            suspicious_prob = 75
+        normal_prob = max(0, 100 - purchases * 15)
+        suspicious_prob = 100 - normal_prob
 
         col1, col2 = st.columns(2)
         col1.metric("Normal Behavior", f"{normal_prob:.2f}%")
@@ -160,4 +156,5 @@ if st.button("Clear"):
     st.session_state.cart = []
     st.success("Cart cleared. Purchases reset to zero.")
 st.markdown("</div>", unsafe_allow_html=True)
+
 
