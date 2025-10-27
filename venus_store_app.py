@@ -119,34 +119,28 @@ for i, product in enumerate(products):
             cart.append({"name": product['name'], "quantity": qty, "price": product['price']})
 
 # زر التنبؤ
+# زر التنبؤ
 if st.button("Checkout & Predict Behavior"):
     if not cart:
         st.warning("Your cart is empty!")
     else:
         purchases = sum([item['quantity'] for item in cart])
-        X_input = np.array([[age, income, purchases]])
-        scaler = StandardScaler()
-        X_scaled = scaler.fit_transform(X_input)
-
-        X_train = np.array([
-            [22, 2500, 1], [30, 4000, 2], [45, 7000, 5],
-            [28, 3000, 0], [35, 5000, 3], [50, 9000, 8]
-        ])
-        y_train = np.array([0, 0, 1, 0, 1, 1])
-
-        X_train_scaled = scaler.fit_transform(X_train)
-        model = LogisticRegression()
-        model.fit(X_train_scaled, y_train)
-
-        pred_prob = model.predict_proba(X_scaled)[0]
-        normal_prob = pred_prob[0] * 100
-        suspicious_prob = pred_prob[1] * 100
-
         st.markdown("<div class='section-title'>Behavior Prediction</div>", unsafe_allow_html=True)
+
+        # تحديد النسب حسب عدد المشتريات
+        if purchases <= 3:
+            normal_prob = max(60, 100 - purchases * 10)  # كل ما زاد العدد تقل النسبة شوي
+            suspicious_prob = 100 - normal_prob
+        else:
+            suspicious_prob = min(90, purchases * 12)  # كل ما زاد العدد تزيد النسبة شوي
+            normal_prob = 100 - suspicious_prob
+
+        # عرض النسب
         col1, col2 = st.columns(2)
         col1.metric("Normal Behavior", f"{normal_prob:.2f}%")
         col2.metric("Suspicious Behavior", f"{suspicious_prob:.2f}%")
 
+        # رسم بياني
         fig = px.pie(
             names=["Normal", "Suspicious"],
             values=[normal_prob, suspicious_prob],
@@ -160,3 +154,4 @@ if st.button("Checkout & Predict Behavior"):
         )
         fig.update_traces(textinfo='percent+label', textfont_size=16)
         st.plotly_chart(fig, use_container_width=True)
+
