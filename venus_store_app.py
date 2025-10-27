@@ -69,6 +69,10 @@ st.markdown("""
 # عنوان المتجر
 st.markdown("<div class='store-title'>Mytheresa</div><hr>", unsafe_allow_html=True)
 
+# قسم العروض
+st.markdown("<div class='section-title'>HOLIDAY SEASON IS COMING</div>", unsafe_allow_html=True)
+st.image("https://www.mytheresa.com/content/2760/1250/65/8b117e66-3bef-4dc4-8eeb-e1facf155a7e.jpg", use_container_width=True)
+
 # المنتجات
 st.markdown("<div class='section-title'>Best-selling Categories</div>", unsafe_allow_html=True)
 products = [
