@@ -5,83 +5,93 @@ from sklearn.linear_model import LogisticRegression
 import plotly.express as px
 
 # إعداد الصفحة
-st.set_page_config(page_title="Venus Store", layout="wide")
+st.set_page_config(page_title="MYTHERESA", layout="wide")
 
-# شعار التطبيق
-logo_url = "https://www2.0zz0.com/2025/10/27/20/506464810.png"
-st.markdown(f"""
-    <div style="display:flex; align-items:center; justify-content:center;">
-        <img src="{logo_url}" style="height:48px; margin-right:10px;" />
-        <h1 style="margin:0; font-size:48px;">Venus Store</h1>
-    </div>
-    <hr>
-""", unsafe_allow_html=True)
-
-# تنسيق CSS
+# تنسيق CSS للخطوط والتصميم
 st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
+
         html, body, [class*="css"] {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Libre Baskerville', serif;
             background-color: #fef6f9;
-            color: #4a148c;
+            color: #2c2c2c;
         }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
         .stButton>button {
-            background-color: #ff69b4;
+            background-color: #000;
             color: white;
-            border-radius: 10px;
+            border-radius: 0px;
             font-weight: bold;
+            font-family: 'Libre Baskerville', serif;
+        }
+
+        .stSlider label, .stNumberInput label {
+            font-weight: bold;
+        }
+
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
         }
     </style>
 """, unsafe_allow_html=True)
+
+# عنوان المتجر
+st.markdown("<h1 style='text-align:center;'>MYTHERESA</h1><hr>", unsafe_allow_html=True)
 
 # بيانات الزبون
 st.sidebar.header("Customer Info")
 age = st.sidebar.slider("Age", 18, 60, 25)
 income = st.sidebar.slider("Monthly Income ($)", 1000, 10000, 3000)
 
-# قسم عروض اليوم
+# قسم عروض اليوم (صور فقط بدون نص)
 st.markdown("## Today's Deals")
-deals = [
-    {"name": "Wireless Earbuds", "price": 39, "old_price": 59, "img": "https://placehold.co/300x200?text=Earbuds"},
-    {"name": "Leather Wallet", "price": 29, "old_price": 45, "img": "https://placehold.co/300x200?text=Wallet"}
+deal_images = [
+    "https://www2.0zz0.com/2025/10/27/21/138787801.png",
+    "https://i.pinimg.com/1200x/9a/00/c8/9a00c8436f2fadecb607943533041883.jpg"
 ]
-deal_cols = st.columns(len(deals))
-for i, deal in enumerate(deals):
+deal_cols = st.columns(len(deal_images))
+for i, img_url in enumerate(deal_images):
     with deal_cols[i]:
-        st.image(deal["img"], use_container_width=True)
-        st.markdown(f"**{deal['name']}**")
-        st.markdown(f"**${deal['price']}** ~~${deal['old_price']}~~")
+        st.image(img_url, use_container_width=True)
 
 st.markdown("---")
 
 # قسم المنتجات المميزة
 st.markdown("## Featured Products")
 featured = [
-    {"name": "Smart Watch", "price": 99, "img": "https://placehold.co/300x200?text=Smart+Watch"},
-    {"name": "Stylish Backpack", "price": 75, "img": "https://placehold.co/300x200?text=Backpack"},
-    {"name": "Elegant Sunglasses", "price": 55, "img": "https://placehold.co/300x200?text=Sunglasses"}
+    {"name": "Coffee 1940s Faux Fur Coat", "price": 200, "img": "https://i.pinimg.com/736x/89/1b/06/891b06dc311ba96d1cad22eed7f986f1.jpg"},
+    {"name": "1996 gripoix-buttons velour shirt", "price": 500, "img": "https://i.pinimg.com/736x/ac/a2/1e/aca21e70d95e62dedc827d59018a371a.jpg"},
+    {"name": "Chichi silk bustier gown", "price": 800, "img": "https://i.pinimg.com/736x/ad/f6/0d/adf60d0058ebb13457f6d239eeb0b4b0.jpg"}
 ]
 feat_cols = st.columns(len(featured))
 for i, item in enumerate(featured):
     with feat_cols[i]:
         st.image(item["img"], use_container_width=True)
-        st.markdown(f"**{item['name']}**")
+        st.markdown(f"<div class='product-title'>{item['name']}</div>", unsafe_allow_html=True)
         st.markdown(f"Price: ${item['price']}")
 
 st.markdown("---")
 
 # المنتجات الأساسية
-st.markdown("## Select Your Products")
+st.markdown("## Best-selling Categories")
 products = [
-    {"name": "Red Shirt", "price": 25, "img": "https://placehold.co/300x200?text=Red+Shirt"},
-    {"name": "Backpack", "price": 60, "img": "https://placehold.co/300x200?text=Backpack"},
-    {"name": "Watch", "price": 120, "img": "https://placehold.co/300x200?text=Watch"},
-    {"name": "Sunglasses", "price": 50, "img": "https://placehold.co/300x200?text=Sunglasses"},
-    {"name": "Denim Jacket", "price": 85, "img": "https://placehold.co/300x200?text=Denim+Jacket"},
-    {"name": "Running Shoes", "price": 110, "img": "https://placehold.co/300x200?text=Running+Shoes"},
-    {"name": "Perfume", "price": 45, "img": "https://placehold.co/300x200?text=Perfume"},
-    {"name": "Wireless Headphones", "price": 95, "img": "https://placehold.co/300x200?text=Headphones"}
+    {"name": "Bettina Mini croc-effect leather tote bag", "price": 600, "img": "https://i.pinimg.com/736x/ad/f6/0d/adf60d0058ebb13457f6d239eeb0b4b0.jpg"},
+    {"name": "Anagram leather-trimmed quilted jacket", "price": 1000, "img": "https://www.mytheresa.com/media/1094/1238/100/e5/P01117649.jpg"},
+    {"name": "Florie satin-trimmed halterneck gown", "price": 1200, "img": "https://www.mytheresa.com/media/1094/1238/100/8c/P01114291_b1.jpg"},
+    {"name": "Holli 70 mirrored leather slingback pumps", "price": 695, "img": "https://www.mytheresa.com/media/1094/1238/100/5c/P01108790.jpg"},
+    {"name": "Mid-rise barrel-leg jeans", "price": 850, "img": "https://www.mytheresa.com/media/1094/1238/100/0a/P01084945.jpg"},
+    {"name": "Uma shearling wrap coat", "price": 1400, "img": "https://www.mytheresa.com/media/1094/1238/100/84/P01102423.jpg"},
+    {"name": "Cassandre Envelope Small leather wallet on chain", "price": 950, "img": "https://www.mytheresa.com/media/1094/1238/100/2d/P01130307_b1.jpg"},
+    {"name": "Alaska suede mid-calf boots", "price": 1100, "img": "https://www.mytheresa.com/media/1094/1238/100/10/P01129115_d2.jpg"}
 ]
 
 cart = []
@@ -89,7 +99,7 @@ cols = st.columns(4)
 for i, product in enumerate(products):
     with cols[i % 4]:
         st.image(product["img"], use_container_width=True)
-        st.markdown(f"**{product['name']}**")
+        st.markdown(f"<div class='product-title'>{product['name']}</div>", unsafe_allow_html=True)
         st.markdown(f"Price: ${product['price']}")
         qty = st.number_input(f"Qty", min_value=0, max_value=10, value=0, key=product['name'])
         if qty > 0:
@@ -129,8 +139,7 @@ if st.button("Checkout & Predict Behavior"):
             names=["Normal", "Suspicious"],
             values=[normal_prob, suspicious_prob],
             color=["Normal", "Suspicious"],
-            color_discrete_map={"Normal": "#ffb6c1", "Suspicious": "#ff69b4"},
+            color_discrete_map={"Normal": "#d4afcd", "Suspicious": "#ff69b4"},
             title="Customer Behavior Analysis"
         )
         st.plotly_chart(fig, use_container_width=True)
-
