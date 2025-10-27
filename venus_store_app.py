@@ -5,11 +5,12 @@ from sklearn.linear_model import LogisticRegression
 import plotly.express as px
 
 # إعداد الصفحة
-st.set_page_config(page_title="MYTHERESA", layout="wide")
+st.set_page_config(page_title="Mytheresa", layout="wide")
 
 # تنسيق CSS للخطوط والتصميم
 st.markdown("""
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
 
@@ -19,11 +20,14 @@ st.markdown("""
             color: #2c2c2c;
         }
 
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 48px;
+        .store-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 64px;
             text-align: center;
-            margin-bottom: 0.5em;
+            color: #1a1a1a;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
         }
 
         .section-title {
@@ -61,7 +65,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # عنوان المتجر
-st.markdown("<h1>MYTHERESA</h1><hr>", unsafe_allow_html=True)
+st.markdown("<div class='store-title'>Mytheresa</div><hr>", unsafe_allow_html=True)
 
 # بيانات الزبون
 st.sidebar.header("Customer Info")
@@ -148,9 +152,4 @@ if st.button("Checkout & Predict Behavior"):
             values=[normal_prob, suspicious_prob],
             color=["Normal", "Suspicious"],
             color_discrete_map={
-                "Normal": "#e4b7c4",
-                "Suspicious": "#990033"
-            },
-            title="Customer Behavior Analysis"
-        )
-        st.plotly_chart(fig, use_container_width=True)
+                "Normal": "#e4b
