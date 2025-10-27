@@ -133,3 +133,4 @@ if st.button("Checkout & Predict Behavior"):
             title="Customer Behavior Analysis"
         )
         st.plotly_chart(fig, use_container_width=True)
+
