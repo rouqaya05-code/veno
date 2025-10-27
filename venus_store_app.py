@@ -1,5 +1,3 @@
-# File: venus_store_app.py
-
 import streamlit as st
 import numpy as np
 from sklearn.preprocessing import StandardScaler
@@ -45,7 +43,7 @@ income = st.sidebar.slider("Monthly Income ($)", 1000, 10000, 3000)
 # قسم عروض اليوم
 st.markdown("## Today's Deals")
 deals = [
-    {"name": "Wireless Earbuds", "price": 39, "old_price": 59, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"},
+    {"name": "Wireless Earbuds", "price": 39, "old_price": 59, "img": "https://images.unsplash.com/photo-1606813909357-4e4f7e7c3f3d"},
     {"name": "Leather Wallet", "price": 29, "old_price": 45, "img": "https://images.unsplash.com/photo-1616627989397-4c7c1e3b6c3e"}
 ]
 deal_cols = st.columns(len(deals))
@@ -53,7 +51,7 @@ for i, deal in enumerate(deals):
     with deal_cols[i]:
         st.image(deal["img"], use_container_width=True)
         st.markdown(f"**{deal['name']}**")
-        st.markdown(f"<span style='color:#d32f2f;'>${deal['price']}</span> <del>${deal['old_price']}</del>", unsafe_allow_html=True)
+        st.markdown(f"**${deal['price']}** ~~${deal['old_price']}~~")
 
 st.markdown("---")
 
@@ -77,15 +75,19 @@ st.markdown("---")
 st.markdown("## Select Your Products")
 products = [
     {"name": "Red Shirt", "price": 25, "img": "https://images.unsplash.com/photo-1618354691373-8f6f3c1e8c3b"},
-    {"name": "Backpack", "price": 60, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"},
+    {"name": "Backpack", "price": 60, "img": "https://images.unsplash.com/photo-1598032893363-8f7c0f6f5b6e"},
     {"name": "Watch", "price": 120, "img": "https://images.unsplash.com/photo-1517059224940-d4af9eec41e5"},
-    {"name": "Sunglasses", "price": 50, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"}
+    {"name": "Sunglasses", "price": 50, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"},
+    {"name": "Denim Jacket", "price": 85, "img": "https://images.unsplash.com/photo-1602810319427-1b4c1f6c9e3f"},
+    {"name": "Running Shoes", "price": 110, "img": "https://images.unsplash.com/photo-1600180758890-3c9e3e3e3e3e"},
+    {"name": "Perfume", "price": 45, "img": "https://images.pexels.com/photos/11705153/pexels-photo-11705153.jpeg"},
+    {"name": "Wireless Headphones", "price": 95, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"}
 ]
 
 cart = []
 cols = st.columns(4)
 for i, product in enumerate(products):
-    with cols[i]:
+    with cols[i % 4]:
         st.image(product["img"], use_container_width=True)
         st.markdown(f"**{product['name']}**")
         st.markdown(f"Price: ${product['price']}")
