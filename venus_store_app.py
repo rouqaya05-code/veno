@@ -7,7 +7,7 @@ import plotly.express as px
 # إعداد الصفحة
 st.set_page_config(page_title="Venus Store", layout="wide")
 
-# شعار التطبيق بحجم النص
+# شعار التطبيق
 logo_url = "https://www2.0zz0.com/2025/10/27/20/506464810.png"
 st.markdown(f"""
     <div style="display:flex; align-items:center; justify-content:center;">
@@ -43,8 +43,8 @@ income = st.sidebar.slider("Monthly Income ($)", 1000, 10000, 3000)
 # قسم عروض اليوم
 st.markdown("## Today's Deals")
 deals = [
-    {"name": "Wireless Earbuds", "price": 39, "old_price": 59, "img": "https://images.unsplash.com/photo-1606813909357-4e4f7e7c3f3d"},
-    {"name": "Leather Wallet", "price": 29, "old_price": 45, "img": "https://images.unsplash.com/photo-1616627989397-4c7c1e3b6c3e"}
+    {"name": "Wireless Earbuds", "price": 39, "old_price": 59, "img": "https://placehold.co/300x200?text=Earbuds"},
+    {"name": "Leather Wallet", "price": 29, "old_price": 45, "img": "https://placehold.co/300x200?text=Wallet"}
 ]
 deal_cols = st.columns(len(deals))
 for i, deal in enumerate(deals):
@@ -58,9 +58,9 @@ st.markdown("---")
 # قسم المنتجات المميزة
 st.markdown("## Featured Products")
 featured = [
-    {"name": "Smart Watch", "price": 99, "img": "https://images.unsplash.com/photo-1517059224940-d4af9eec41e5"},
-    {"name": "Stylish Backpack", "price": 75, "img": "https://images.unsplash.com/photo-1598032893363-8f7c0f6f5b6e"},
-    {"name": "Elegant Sunglasses", "price": 55, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"}
+    {"name": "Smart Watch", "price": 99, "img": "https://placehold.co/300x200?text=Smart+Watch"},
+    {"name": "Stylish Backpack", "price": 75, "img": "https://placehold.co/300x200?text=Backpack"},
+    {"name": "Elegant Sunglasses", "price": 55, "img": "https://placehold.co/300x200?text=Sunglasses"}
 ]
 feat_cols = st.columns(len(featured))
 for i, item in enumerate(featured):
@@ -74,14 +74,14 @@ st.markdown("---")
 # المنتجات الأساسية
 st.markdown("## Select Your Products")
 products = [
-    {"name": "Red Shirt", "price": 25, "img": "https://images.unsplash.com/photo-1618354691373-8f6f3c1e8c3b"},
-    {"name": "Backpack", "price": 60, "img": "https://images.unsplash.com/photo-1598032893363-8f7c0f6f5b6e"},
-    {"name": "Watch", "price": 120, "img": "https://images.unsplash.com/photo-1517059224940-d4af9eec41e5"},
-    {"name": "Sunglasses", "price": 50, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"},
-    {"name": "Denim Jacket", "price": 85, "img": "https://images.unsplash.com/photo-1602810319427-1b4c1f6c9e3f"},
-    {"name": "Running Shoes", "price": 110, "img": "https://images.unsplash.com/photo-1600180758890-3c9e3e3e3e3e"},
-    {"name": "Perfume", "price": 45, "img": "https://images.pexels.com/photos/11705153/pexels-photo-11705153.jpeg"},
-    {"name": "Wireless Headphones", "price": 95, "img": "https://images.unsplash.com/photo-1585386959984-a415522b831c"}
+    {"name": "Red Shirt", "price": 25, "img": "https://placehold.co/300x200?text=Red+Shirt"},
+    {"name": "Backpack", "price": 60, "img": "https://placehold.co/300x200?text=Backpack"},
+    {"name": "Watch", "price": 120, "img": "https://placehold.co/300x200?text=Watch"},
+    {"name": "Sunglasses", "price": 50, "img": "https://placehold.co/300x200?text=Sunglasses"},
+    {"name": "Denim Jacket", "price": 85, "img": "https://placehold.co/300x200?text=Denim+Jacket"},
+    {"name": "Running Shoes", "price": 110, "img": "https://placehold.co/300x200?text=Running+Shoes"},
+    {"name": "Perfume", "price": 45, "img": "https://placehold.co/300x200?text=Perfume"},
+    {"name": "Wireless Headphones", "price": 95, "img": "https://placehold.co/300x200?text=Headphones"}
 ]
 
 cart = []
