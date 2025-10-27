@@ -39,7 +39,7 @@ st.markdown("""
             font-family: 'Libre Baskerville', serif;
             font-size: 18px;
             font-weight: bold;
-            color: #4a148c;
+            color: #6b0f1a;
         }
 
         .product-title {
@@ -145,4 +145,7 @@ if st.button("Checkout & Predict Behavior"):
             names=["Normal", "Suspicious"],
             values=[normal_prob, suspicious_prob],
             color=["Normal", "Suspicious"],
-            color_discrete_map={"Normal": "#990033", "Suspicious": "#990033
+            color_discrete_map={"Normal": "#990033", "Suspicious": "#990033"},
+            title="Customer Behavior Analysis"
+        )
+        st.plotly_chart(fig, use_container_width=True)
